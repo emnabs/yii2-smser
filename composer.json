@@ -1,0 +1,22 @@
+{
+    "name": "emnabs/yii2-smser",
+    "description": "Yii2 Smser Component",
+    "keywords": ["yii2", "smser", "extension"],
+    "homepage": "https://github.com/emnabs/yii2-smser",
+    "type": "yii2-extension",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "emhome",
+            "email": "emhome@163.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "emhome\\smser\\": ""
+        }
+    }
+}
