@@ -1,5 +1,4 @@
 # Yii2 Smser Component
-==========
 
 Smser is a component based sms solution for Yii2.It is released under the BSD 3-Clause license.
 
@@ -9,7 +8,6 @@ Smser is a component based sms solution for Yii2.It is released under the BSD 3-
 
 
 ## Installation
----------------
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
@@ -28,7 +26,6 @@ or add
 to the require section of your composer.json.
 
 ## Usage
---------
 
 To use this extension, you have to configure the Connection class in your application configuration:
 
@@ -56,7 +53,6 @@ Yii::$app->smser->compose()
 ```
 
 ## 包含接口
------------
 
 * [漫道科技](http://www.zucp.net/)
 * [中国云信](http://www.sms.cn/)
@@ -68,6 +64,5 @@ Yii::$app->smser->compose()
 
 
 ## License
-----------
 
 **yii2-smser** is released under the `BSD 3-Clause` License. See the bundled `LICENSE.md` for details.
