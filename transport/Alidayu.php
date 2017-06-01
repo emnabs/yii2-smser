@@ -3,6 +3,7 @@
 namespace emhome\smser\transport;
 
 use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 use emhome\smser\src\BaseMessage;
 use emhome\smser\src\BaseTransport;
 
@@ -23,6 +24,24 @@ class Alidayu extends BaseTransport {
      * @inheritdoc
      */
     public $dataType = 'json';
+
+    /**
+     * @inheritdoc
+     */
+    public $options = [
+        'method' => 'alibaba.aliqin.fc.sms.num.send',
+        'partner_id' => '',
+        'sign' => '',
+        'sign_method' => '',
+        'timestamp' => '',
+        'v' => '',
+        'extend' => '',
+        'rec_num' => '',
+        'sms_free_sign_name' => '',
+        'sms_param' => '',
+        'sms_template_code' => '',
+        'sms_type' => '',
+    ];
 
     /**
      * @inheritdoc
@@ -48,24 +67,20 @@ class Alidayu extends BaseTransport {
             return false;
         }
 
-        $params = [
-            'app_key' => $this->username,
-            'format' => $this->password,
-            'method' => $this->password,
-            'partner_id' => $this->password,
-            'sign' => $this->password,
-            'sign_method' => $this->password,
+        $params = ArrayHelper::merge($this->options, [
+            'method' => 'alibaba.aliqin.fc.sms.num.send',
+            'partner_id' => $this->partner,
+            'sign' => $this->sign,
+            'sign_method' => $this->sign_method,
             'timestamp' => $this->password,
-            'v' => $this->password,
-            'extend' => $this->password,
-            'rec_num' => $this->password,
-            'sms_free_sign_name' => $this->password,
-            'sms_param' => $this->password,
-            'sms_template_code' => $this->password,
-            'sms_type' => $this->password,
-            'mobile' => $message->getMobile(),
-            'content' => $message->getContent()
-        ];
+            'v' => $this->version,
+            'extend' => $this->extend,
+            'rec_num' => $message->getMobile(),
+            'sms_free_sign_name' => $this->sms_free_sign_name,
+            'sms_param' => $this->sms_param,
+            'sms_template_code' => $this->sms_template_code,
+            'sms_type' => $this->sms_type,
+        ]);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->url);
@@ -95,6 +110,25 @@ class Alidayu extends BaseTransport {
             throw new InvalidConfigException('账户用户名不能为空!', 500);
         }
         $this->password = md5($password . $this->username);
+    }
+
+    /**
+     * 设置阿里大鱼配置信息
+     * 
+     * @param string $password
+     * @throws InvalidConfigException
+     */
+    public function setOptions($options) {
+        if (!array_key_exists('app_key', $options)) {
+            $options['app_key'] = $this->username;
+        }
+        if (!array_key_exists('format', $options)) {
+            $options['format'] = $this->dataType;
+        }
+        if (!array_key_exists('format', $options)) {
+            $options['format'] = $this->dataType;
+        }
+        $this->options = $options;
     }
 
     /**
